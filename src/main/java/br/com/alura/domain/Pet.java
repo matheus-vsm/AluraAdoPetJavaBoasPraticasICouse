@@ -10,6 +10,9 @@ public class Pet {
     private String cor;
     private double peso;
 
+    public Pet() {
+    }
+
     public Pet(String tipo, String nome, String raca, int idade, String cor, double peso) {
         this.tipo = tipo;
         this.nome = nome;

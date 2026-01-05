@@ -18,7 +18,7 @@ public class AbrigoService {
         this.client = client;
     }
 
-    public void listarAbrigo() throws IOException, InterruptedException {
+    public void listarAbrigos() throws IOException, InterruptedException {
         String uri = "http://localhost:8080/abrigos";
         HttpResponse<String> response = client.dispararRequisicaoGet(uri);
 

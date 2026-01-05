@@ -29,7 +29,7 @@ public class AdopetConsoleApplication {
                 opcaoEscolhida = Integer.parseInt(textoDigitado);
 
                 if (opcaoEscolhida == 1) {
-                    abrigoService.listarAbrigo();
+                    abrigoService.listarAbrigos();
                 } else if (opcaoEscolhida == 2) {
                     abrigoService.cadastrarAbrigo();
                 } else if (opcaoEscolhida == 3) {

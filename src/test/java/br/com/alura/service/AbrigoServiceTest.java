@@ -5,19 +5,21 @@ import br.com.alura.domain.Abrigo;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.http.HttpResponse;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class AbrigoServiceTest {
 
     private final ClientHttpConfiguration client = mock(ClientHttpConfiguration.class);
     private final AbrigoService abrigoService = new AbrigoService(client);
+    private final PetService petService = new PetService(client);
     private final HttpResponse<String> response = mock(HttpResponse.class);
     private final Abrigo abrigo = new Abrigo("Teste", "61981880392", "abrigo_alura@gmail.com");
 
@@ -62,6 +64,19 @@ public class AbrigoServiceTest {
         String actual = lines[0];
 
         Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void deveVerificarSeDispararRequisicaoPostSeraChamado() throws IOException, InterruptedException {
+        String userInput = String.format("Teste%spets.csv",
+                System.lineSeparator());
+        ByteArrayInputStream bais = new ByteArrayInputStream(userInput.getBytes());
+        System.setIn(bais);
+
+        when(client.dispararRequisicaoPost(anyString(), any())).thenReturn(response);
+
+        petService.importarPetsDoAbrigo();
+        verify(client.dispararRequisicaoPost(anyString(), anyString()), atLeast(1));
     }
 
 }

@@ -1,19 +1,19 @@
 package br.com.alura.command;
 
 import br.com.alura.client.ClientHttpConfiguration;
-import br.com.alura.service.AbrigoService;
+import br.com.alura.service.PetService;
 
 import java.io.IOException;
 
-public class CadastrarAbrigoCommand implements Command {
+public class ListarPetsDoAbrigoCommand implements Command {
 
     @Override
     public void execute() {
         try {
             ClientHttpConfiguration client = new ClientHttpConfiguration();
-            AbrigoService abrigoService = new AbrigoService(client);
+            PetService petService = new PetService(client);
 
-            abrigoService.cadastrarAbrigo();
+            petService.listarPetsDoAbrigo();
         } catch (IOException | InterruptedException e) {
             System.out.println(e.getMessage());
         }

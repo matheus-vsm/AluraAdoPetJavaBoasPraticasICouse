@@ -18,4 +18,5 @@ public class ListarAbrigoCommand implements Command {
             System.out.println(e.getMessage());
         }
     }
+
 }
